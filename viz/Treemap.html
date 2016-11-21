@@ -9,7 +9,7 @@
 
 <script>
 
-  var data = [
+  const data = [
     {parent: "Group 1", id: "alpha", value: 29},
     {parent: "Group 1", id: "beta",  value: 10},
     {parent: "Group 1", id: "gamma", value: 2},
@@ -17,9 +17,117 @@
     {parent: "Group 2", id: "eta",   value: 25}
   ];
 
+  // new d3plus.Treemap()
+  //   .data(data)
+  //   .render();
+
+  // ok now lets be explicit
+  // ... put in defaults ...
+  // new d3plus.Treemap()
+  //   .select("body")
+  //   .data(data)
+  //   .groupBy("id")
+  //   .value(x => x.value)
+  //   .render();
+
+  // ok now how can we do this with a single json obj
+  // const myVizConfiguration = {
+  //   select: "body",
+  //   data: data,
+  //   groupBy: "id",
+  //   value: x => x.value
+  // }
+  // new d3plus.Treemap()
+  //   .config(myVizConfiguration)
+  //   .render()
+
+  // a common thing to do in tree maps is nesting
+  // .groupBy(["parent", "id"])
+
+  // lets talk about documentation now...
+  // since d3plus is now split into multiple repos we have to think of our visualization
+  // as a collection of components (d3plus-shape, d3plus-tooltip, d3plus-legend)
+  // buttttttt the tree map itself extends the Viz class
+
+  // lets say we want to change the text labels... where do we look for documentation
+  // we look in d3plus-shape, since these labels are the the rects of the Treemap
+  // Put the labels in the top left corner
+  // new d3plus.Treemap()
+  //   .select("body")
+  //   .data(data)
+  //   .groupBy("id")
+  //   .sum(x => x.value)
+  //   .shapeConfig({
+  //     textAnchor: ["middle", "middle"],
+  //     verticalAlign: "top",
+  //     fontFamily: x => "Comic Sans MS"
+  //   })
+  //   .render();
+
+  // how can we scope our configuration... since the legend also uses shapes it gets
+  // all the config we specified
+  // new d3plus.Treemap()
+  //   .select("body")
+  //   .data(data)
+  //   .groupBy("id")
+  //   .sum(x => x.value)
+  //   .shapeConfig({
+  //     textAnchor: "start",
+  //     verticalAlign: "top",
+  //     fontFamily: x => "Times Roman"
+  //   })
+  //   .legendConfig({
+  //     shapeConfig: {
+  //       fontFamily: x => "Comic Sans MS"
+  //     }
+  //   })
+  //   .render();
+
+  // how about adding something to the tooltip!
+  // new d3plus.Treemap()
+  //   .select("body")
+  //   .data(data)
+  //   .groupBy(["parent", "id"])
+  //   .sum(x => x.value)
+  //   .shapeConfig({
+  //     textAnchor: "start",
+  //     verticalAlign: "top",
+  //     fontFamily: x => "Times Roman"
+  //   })
+  //   .legendConfig({
+  //     shapeConfig: {
+  //       fontFamily: x => "Comic Sans MS"
+  //     }
+  //   })
+  //   .tooltipConfig({
+  //     title: x => x.id,
+  //     body: x => `Parent: ${x.parent}`
+  //   })
+  //   .render();
+
+  // manually set color
   new d3plus.Treemap()
+    .select("body")
     .data(data)
     .groupBy(["parent", "id"])
+    .sum(x => x.value)
+    .shapeConfig({
+      textAnchor: "start",
+      verticalAlign: "top",
+      fontFamily: x => "Times Roman",
+      fill: x => x.parent === "Group 1" ? "seashell" : "green",
+      stroke: "black",
+      strokeWidth: x => x.parent === "Group 1" ? "1px" : "0px",
+    })
+    .legendConfig({
+      shapeConfig: {
+        fontFamily: x => "Comic Sans MS"
+      }
+    })
+    .tooltipConfig({
+      title: x => x.id,
+      body: x => `Parent: ${x.parent}`
+    })
     .render();
 
 </script>
