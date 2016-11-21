@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="../build/d3plus.full.js"></script>
+
+<body>
+
+</body>
+
+<script>
+
+  var data = [
+    {shape: "Line",   parent: "Group 2", id: "theta",   x: 42, y: 6,  value: 29},
+    {shape: "Line",   parent: "Group 2", id: "theta",   x: 50, y: 4,  value: 10},
+    {shape: "Line",   parent: "Group 2", id: "theta",   x: 60, y: 10, value: 2},
+    {shape: "Circle", parent: "Group 1", id: "alpha",   x: 40, y: 7,  value: 29},
+    {shape: "Circle", parent: "Group 1", id: "beta",    x: 50, y: 2,  value: 10},
+    {shape: "Circle", parent: "Group 1", id: "gamma",   x: 60, y: 13, value: 2},
+    {shape: "Rect",   parent: "Group 2", id: "epsilon", x: 47, y: 10, value: 29},
+    {shape: "Rect",   parent: "Group 2", id: "zeta",    x: 52, y: 15, value: 25}
+  ];
+
+  var tmap = new d3plus.Plot()
+    .data(data)
+    .discrete("x")
+    .groupBy(["parent", "id"])
+    .shape(function(d) { return d.shape; })
+    .render();
+
+</script>
