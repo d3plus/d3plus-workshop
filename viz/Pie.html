@@ -1,0 +1,37 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<script src="../d3plus.v2.js"></script>
+
+<body>
+
+</body>
+
+<script>
+
+  const data = [
+    {parent: "Group 1", id: "alpha", value: 29},
+    {parent: "Group 1", id: "beta",  value: 10},
+    {parent: "Group 1", id: "gamma", value: 2},
+    {parent: "Group 2", id: "delta", value: 29},
+    {parent: "Group 2", id: "eta",   value: 25}
+  ];
+
+  let pie = new d3plus.Pie()
+    .groupBy("id")
+    .select("body")
+    .data(data);
+
+  // set the inner radius
+  pie.innerRadius(200);
+
+  // set padding on wedges
+  pie.padPixel(6);
+
+  // we can also nest the same way as tmaps
+  pie.groupBy(["parent", "id"])
+
+  pie.render();
+
+
+</script>
