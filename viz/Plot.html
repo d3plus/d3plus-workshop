@@ -20,11 +20,43 @@
     {shape: "Rect",   parent: "Group 2", id: "zeta",    x: 52, y: 15, value: 25}
   ];
 
-  var tmap = new d3plus.Plot()
+  // https://github.com/d3plus/d3plus-plot#Plot
+  let plot = new d3plus.Plot()
+    .select("body")
     .data(data)
     .discrete("x")
     .groupBy(["parent", "id"])
-    .shape(function(d) { return d.shape; })
-    .render();
+    .shape(d => d.shape)
+    // .render();
+
+  // size shapes
+  plot.shapeConfig({
+    Circle: {
+      r: x => x.value
+    },
+    Rect: {
+      width: x => x.value,
+      height: x => x.value
+    },
+    Line: {
+      strokeWidth: x => x.value,
+    },
+  });
+
+  // Axis config
+  plot.yConfig({
+    domain: [0, 20],
+    labels: [0, 5, 10, 15, 20],
+  });
+
+
+  // Let's give them titles
+  plot.yConfig({
+    title: "Total Exports"
+  }).xConfig({
+    title: "Products"
+  });
+
+  plot.render();
 
 </script>
