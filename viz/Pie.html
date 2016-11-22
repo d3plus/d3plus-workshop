@@ -17,9 +17,9 @@
     {parent: "Group 2", id: "eta",   value: 25}
   ];
 
-  let tmap = d3plus.Treemap()
-    .data(data)
-    .groupBy(["parent", "id"])
-    .render();
+  let pie = new d3plus.Pie()
+    .groupBy("id")
+    .select("body")
+    .data(data);
 
 </script>

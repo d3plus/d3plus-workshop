@@ -9,19 +9,15 @@
 
 <script>
 
-  var points = [
-    {id: "Boston", value: 1234, point: [-71.0589, 42.3601]},
-    {id: "London", value: 1602, point: [-0.1278, 51.5074]}
+  const points = [
+    {id: "Boston", value: 1834, point: [-71.0589, 42.3601], country: "usa"},
+    {id: "Belo Horizonte", value: 2602, point: [-43.93778, -19.92083], country: "bra"}
   ];
 
-  var tmap = new d3plus.Geomap()
+  let geomap = new d3plus.Geomap()
     .data(points)
     .ocean("#eef")
-    .pointSize(function(d) { return d.value; })
-    .shapeConfig({
-      fill: function(d) { return "#cc0000"; }
-    })
-    .tiles(false)
+    .tiles(true)
     .render();
 
 </script>

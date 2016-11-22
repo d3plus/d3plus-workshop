@@ -9,13 +9,13 @@
 
 <script>
 
-  var data = [
+  let data = [
     {id: "alpha",   start: 2004, end: 2007},
     {id: "epsilon", start: 2007, end: 2012},
     {id: "beta",    start: 2005, end: 2010},
   ];
 
-  new d3plus.Priestley()
+  let priestley = d3plus.Priestley()
     .data(data)
     .render();
 
