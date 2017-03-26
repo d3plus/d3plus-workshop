@@ -10,14 +10,14 @@
 <script>
 
   const data = [
-    {parent: "Group 1", id: "alpha", value: 29},
-    {parent: "Group 1", id: "beta",  value: 10},
-    {parent: "Group 1", id: "gamma", value: 2},
-    {parent: "Group 2", id: "delta", value: 29},
-    {parent: "Group 2", id: "eta",   value: 25}
+    {parent: "Group 1", id: "Alpha", value: 29},
+    {parent: "Group 1", id: "Beta",  value: 10},
+    {parent: "Group 1", id: "Gamma", value: 2},
+    {parent: "Group 2", id: "Delta", value: 29},
+    {parent: "Group 3", id: "Eta",   value: 25}
   ];
 
-  let tmap = d3plus.Treemap()
+  new d3plus.Treemap()
     .data(data)
     .groupBy(["parent", "id"])
     .render();
